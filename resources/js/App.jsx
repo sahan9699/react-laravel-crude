@@ -1,7 +1,9 @@
 
-import PostList from "./componets/Posts/PostList";
+import PostList from "./componets/Posts/PostAll";
 import {BrowserRouter, NavLink, Route, Routes} from "react-router-dom";
 import PostCreate from "./componets/Posts/PostCreate";
+import {useState} from "react";
+import PostAll from "./componets/Posts/PostAll";
 
 export default function App() {
 
@@ -45,7 +47,7 @@ export default function App() {
                             <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                                 <div className="p-6 bg-white border-b border-gray-200">
                                     <Routes>
-                                        <Route path="/" element={<PostList/>}></Route>
+                                        <Route path="/" element={<PostAll/>}></Route>
                                         <Route path="/posts/create" element={<PostCreate/>}></Route>
                                     </Routes>
                                 </div>
