@@ -45,6 +45,7 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
+
         $post = Post::create($request->validated());
         return new PostResource($post);
     }
@@ -55,9 +56,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        //
+        return new PostResource($post);
     }
 
     /**

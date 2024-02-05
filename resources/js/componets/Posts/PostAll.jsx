@@ -1,6 +1,7 @@
 import { useEffect, useState} from "react";
 import CategoriesService from "../../services/CategoriesService";
 import ApiClient from "../../services/ApiClient";
+import { Link } from "react-router-dom";
 
 const  PostAll = () => {
 
@@ -69,6 +70,9 @@ const  PostAll = () => {
                         <th>
                             <span>Created at</span>
                         </th>
+                        <th>
+                            <span>Action</span>
+                        </th>
                     </tr>
                     </thead>
                     <tbody className="table-body">
@@ -78,6 +82,7 @@ const  PostAll = () => {
                         <td>{post.content}</td>
                         <td>{post.category.name}</td>
                         <td>{post.created_at}</td>
+                        <td><Link to={`post/edit/${post.id}`}>Edit</Link> </td>
                     </tr>)}
                     </tbody>
                 </table>

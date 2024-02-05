@@ -1,22 +1,25 @@
 import {useEffect, useState} from "react";
 import CategoriesService from "../../services/CategoriesService";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import APIClient from "../../services/ApiClient";
 
-const apiClient = new APIClient();
 
-const  PostCreate = () => {
+const  PostEdit = () => {
     const navigate = useNavigate();
-    const [formData, setFormData] = useState({
-        title: '',
-        content: '',
-        category_id: '',
-    });
+    const {id} = useParams();
+    const [formData, setFormData] = useState({ title: '', content: '', category_id: ''});
     const [categories, setCategories ] = useState([]);
     const [errors, setErrors] = useState({});
     const [isLoading, setIsLoading] = useState(false);
 
     const fetchCategories = () => {
+        setIsLoading(true)
+        APIClient.get('posts/' + id)
+        .then(res => {
+             setFormData({title: res.data.data.title,content: res.data.data.content, category_id: res.data.data.category_id})
+        })
+        .finally(() => setIsLoading(false));
+
        CategoriesService.getAll()
             .then((response) => {
                 setCategories(response.data.data)
@@ -28,8 +31,6 @@ const  PostCreate = () => {
         if(isLoading) return;
         setIsLoading(true)
         setErrors({});
-
-
         APIClient.post('/posts', formData)
             .then(res => {
                 navigate('/')
@@ -75,7 +76,6 @@ const  PostCreate = () => {
                     { errors.category_id?.map((error, index) => <span key={error.index}>{error}</span>)}
                     </div>
                 </div>
-                
                 <div className="mt-4">
                     <button type="submit" disabled={isLoading} className="px-4 py-2 bg-blue-500 rounded">
                         {!isLoading ? 'Save' : 'Loading..' }
@@ -87,4 +87,4 @@ const  PostCreate = () => {
     )
 }
 
-export  default PostCreate;
+export  default PostEdit;

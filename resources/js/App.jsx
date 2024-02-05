@@ -1,6 +1,7 @@
 import {BrowserRouter, NavLink, Route, Routes} from "react-router-dom";
 import PostCreate from "./componets/Posts/PostCreate";
 import PostAll from "./componets/Posts/PostAll";
+import PostEdit from "./componets/Posts/PostEdit";
 
 export default function App() {
 
@@ -46,6 +47,7 @@ export default function App() {
                                     <Routes>
                                         <Route path="/" element={<PostAll />}></Route>
                                         <Route path="/posts/create" element={<PostCreate/>}></Route>
+                                        <Route path="/post/edit/:id" element={<PostEdit/>}></Route>
                                     </Routes>
                                 </div>
                             </div>
